@@ -1,0 +1,47 @@
+﻿@using JournalApp.Models
+
+<h1>Journal App</h1>
+
+<input placeholder="Title" @bind="newEntry.Title" />
+<br />
+<textarea placeholder="Write your entry..." @bind="newEntry.Content"></textarea>
+<br />
+<select @bind="newEntry.PrimaryMood">
+    <option>Happy</option>
+    <option>Excited</option>
+    <option>Relaxed</option>
+    <option>Neutral</option>
+    <option>Sad</option>
+</select>
+<br />
+<button @onclick="AddEntry">Add Entry</button>
+
+<h2>Previous Entries</h2>
+<ul>
+    @foreach (var entry in entries)
+    {
+        <li>
+            @entry.CreatedAt.ToShortDateString()
+            - @entry.Title (@entry.PrimaryMood)
+        </li>
+    }
+</ul>
+
+@code {
+    private JournalEntry newEntry = new JournalEntry();
+    private List<JournalEntry> entries = new();
+
+    private void AddEntry()
+    {
+        entries.Add(new JournalEntry
+        {
+            CreatedAt = DateTime.Now,   // ✅ FIX
+            Title = newEntry.Title,
+            Content = newEntry.Content,
+            PrimaryMood = newEntry.PrimaryMood
+        });
+
+        // Clear inputs
+        newEntry = new JournalEntry();
+    }
+}

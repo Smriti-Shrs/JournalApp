@@ -1,0 +1,21 @@
+﻿@inherits LayoutComponentBase
+
+<div class="page">
+    <div class="sidebar">
+        <h3>JournalApp</h3>
+        <nav class="nav flex-column">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">Home</NavLink>
+            <NavLink class="nav-link" href="journal">Journal</NavLink>
+            <NavLink class="nav-link" href="calendar">Calendar</NavLink>
+        </nav>
+    </div>
+
+    <main>
+        <div class="top-row">
+            <span>JournalApp 📝</span>
+        </div>
+        @Body
+    </main>
+</div>
+
+<link href="css/app.css" rel="stylesheet" />

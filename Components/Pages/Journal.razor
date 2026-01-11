@@ -1,0 +1,118 @@
+@page "/journal"
+@using JournalApp.Models
+@using JournalApp.Services
+@inject JournalService JournalService
+
+@inject JournalService JournalService
+<h1 style="color:red">🚀 Journal Page Loaded</h1>
+
+<h2>My Journal</h2>
+
+<div class="entry-form">
+    <input placeholder="Title" @bind="title" />
+    <textarea placeholder="Write your entry..." @bind="content"></textarea>
+    <select @bind="primaryMood">
+        <option value="">Select Mood</option>
+        <option>Happy</option>
+        <option>Excited</option>
+        <option>Relaxed</option>
+        <option>Neutral</option>
+        <option>Sad</option>
+        <option>Angry</option>
+    </select>
+    <button @onclick="AddOrUpdateEntry">@buttonText</button>
+</div>
+
+<p>@message</p>
+
+<hr />
+
+<ul class="journal-list">
+    @foreach (var entry in entries)
+    {
+        <li>
+            <div>
+                <strong>@entry.Title</strong>
+                <span class="mood-badge mood-@entry.PrimaryMood">@entry.PrimaryMood</span>
+                <div>@entry.Content</div>
+                <small>@entry.EntryDate.ToShortDateString()</small>
+            </div>
+            <div>
+                <button @onclick="() => StartEditEntry(entry)">Edit</button>
+                <button @onclick="() => DeleteEntry(entry.Id)">Delete</button>
+            </div>
+        </li>
+    }
+</ul>
+
+@code {
+    string title = "";
+    string content = "";
+    string primaryMood = "";
+    string message = "";
+    int editingId = -1;
+
+    List<JournalEntry> entries = new();
+
+    string buttonText => editingId == -1 ? "Add Entry" : "Update Entry";
+
+    protected override async Task OnInitializedAsync()
+    {
+        entries = await JournalService.GetEntriesAsync();
+    }
+
+    async Task AddOrUpdateEntry()
+    {
+        if (editingId == -1)
+        {
+            var entry = new JournalEntry
+            {
+                Title = title,
+                Content = content,
+                PrimaryMood = primaryMood,
+                EntryDate = DateTime.Now,
+                CreatedAt = DateTime.Now
+            };
+
+            await JournalService.AddEntryAsync(entry);
+            message = "Entry added ✅";
+        }
+        else
+        {
+            var entry = await JournalService.GetEntryByIdAsync(editingId);
+            if (entry != null)
+            {
+                entry.Title = title;
+                entry.Content = content;
+                entry.PrimaryMood = primaryMood;
+                entry.UpdatedAt = DateTime.Now;
+
+                await JournalService.UpdateEntryAsync(entry);
+                message = "Entry updated ✅";
+            }
+            editingId = -1;
+        }
+
+        title = content = primaryMood = "";
+        entries = await JournalService.GetEntriesAsync();
+    }
+
+    void StartEditEntry(JournalEntry entry)
+    {
+        title = entry.Title;
+        content = entry.Content;
+        primaryMood = entry.PrimaryMood;
+        editingId = entry.Id;
+    }
+
+    async Task DeleteEntry(int id)
+    {
+        await JournalService.DeleteEntryAsync(id);
+        if (editingId == id)
+        {
+            editingId = -1;
+            title = content = primaryMood = "";
+        }
+        entries = await JournalService.GetEntriesAsync();
+    }
+}

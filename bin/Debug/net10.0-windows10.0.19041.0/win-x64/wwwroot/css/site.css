@@ -1,0 +1,254 @@
+/* General Layout */
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f6fa;
+    color: #333;
+}
+
+/* Page container */
+.page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Main content area */
+main {
+    flex: 1;
+    padding: 1rem;
+}
+
+/* Sidebar */
+.sidebar {
+    background: linear-gradient(180deg, #053167 0%, #3a0647 70%);
+    color: white;
+    padding: 1rem;
+    min-width: 200px;
+}
+
+/* Top-row navigation */
+.top-row {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #d6d5d5;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 3.5rem;
+    padding: 0 1rem;
+}
+
+/* Inputs and buttons in forms */
+.entry-form input,
+.entry-form textarea,
+.entry-form select {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 0.3rem 0;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.entry-form textarea {
+    min-height: 100px;
+}
+
+/* Buttons */
+.entry-form button {
+    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #053167;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.entry-form button:hover {
+    background-color: #021f50;
+}
+
+/* Journal list items */
+.journal-list li {
+    background: white;
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Edit/Delete buttons inside list */
+.journal-list li button {
+    background-color: #3a0647;
+    padding: 0.2rem 0.5rem;
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.journal-list li button:hover {
+    background-color: #53087a;
+}
+
+/* Mood badges */
+.mood-badge {
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    color: white;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+}
+
+.mood-Happy { background-color: #f1c40f; }
+.mood-Excited { background-color: #e67e22; }
+.mood-Relaxed { background-color: #1abc9c; }
+.mood-Neutral { background-color: #95a5a6; }
+.mood-Sad { background-color: #3498db; }
+.mood-Angry { background-color: #e74c3c; }
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .page { flex-direction: column; }
+    .sidebar { min-width: 100%; height: auto; }
+}
+.top-row {
+    background-color: #053167;
+    color: white;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.navbar-toggler {
+    display: none;
+}
+
+.nav-scrollable {
+    background-color: #3a0647;
+    color: white;
+    width: 200px;
+    min-height: 100vh;
+    padding-top: 1rem;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem;
+    display: block;
+    border-radius: 5px;
+}
+
+.nav-link.active, .nav-link:hover {
+    background-color: #021f50;
+    font-weight: bold;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.pagination button {
+    padding: 0.3rem 0.6rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #053167;
+    color: white;
+    cursor: pointer;
+}
+
+.pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+input[type="date"] {
+    padding: 0.3rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 1rem;
+}
+.entry-form input, .entry-form textarea, .entry-form select {
+    width: 100%;
+    padding: 0.4rem;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.entry-form button {
+    padding: 0.5rem 1rem;
+    background-color: #053167;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.entry-form button:hover {
+    background-color: #021f50;
+}
+
+.journal-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.journal-list li {
+    border-bottom: 1px solid #ccc;
+    padding: 0.5rem 0;
+}
+
+.mood-badge {
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: white;
+    margin-left: 0.5rem;
+}
+
+.mood-Happy { background-color: #28a745; }
+.mood-Excited { background-color: #ffc107; }
+.mood-Relaxed { background-color: #17a2b8; }
+.mood-Neutral { background-color: #6c757d; }
+.mood-Sad { background-color: #007bff; }
+.mood-Angry { background-color: #dc3545; }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.pagination button {
+    padding: 0.3rem 0.6rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #053167;
+    color: white;
+    cursor: pointer;
+}
+
+.pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+input[type="date"] {
+    padding: 0.3rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 1rem;
+}
