@@ -6,8 +6,77 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="12">
-            <Label Text="Analytics" Style="{StaticResource TitleLabelStyle}" />
-            <Label Text="(Placeholder) Implement mood distribution, tag breakdown, and word count trends here." />
+            <Label Text="Analytics &amp; Insights" Style="{StaticResource TitleLabelStyle}" />
+
+            <!-- Date range filter -->
+            <Grid ColumnDefinitions="Auto,*,Auto,*,Auto" RowDefinitions="Auto" Padding="0,10">
+                <Label Text="From:" VerticalOptions="Center" />
+                <DatePicker x:Name="FromDatePicker" Grid.Column="1" />
+                <Label Text="To:" Grid.Column="2" VerticalOptions="Center" Margin="10,0,0,0" />
+                <DatePicker x:Name="ToDatePicker" Grid.Column="3" />
+                <Button Grid.Column="4" Text="Update" Clicked="OnUpdateAnalyticsClicked" />
+            </Grid>
+
+            <!-- Summary cards -->
+            <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto" ColumnSpacing="10" Margin="0,10,0,0">
+                <Frame Padding="10" BackgroundColor="{DynamicResource CardBackgroundColor}" CornerRadius="12"
+                       BorderColor="{DynamicResource PrimaryColor}">
+                    <VerticalStackLayout>
+                        <Label Text="Total Entries" FontAttributes="Bold" />
+                        <Label x:Name="TotalEntriesRangeLabel" FontSize="20" />
+                    </VerticalStackLayout>
+                </Frame>
+                <Frame Padding="10" Grid.Column="1" BackgroundColor="{DynamicResource CardBackgroundColor}" CornerRadius="12"
+                       BorderColor="{DynamicResource PrimaryColor}">
+                    <VerticalStackLayout>
+                        <Label Text="Current Streak" FontAttributes="Bold" />
+                        <Label x:Name="CurrentStreakRangeLabel" FontSize="20" />
+                    </VerticalStackLayout>
+                </Frame>
+                <Frame Padding="10" Grid.Column="2" BackgroundColor="{DynamicResource CardBackgroundColor}" CornerRadius="12"
+                       BorderColor="{DynamicResource PrimaryColor}">
+                    <VerticalStackLayout>
+                        <Label Text="Longest Streak" FontAttributes="Bold" />
+                        <Label x:Name="LongestStreakRangeLabel" FontSize="20" />
+                    </VerticalStackLayout>
+                </Frame>
+                <Frame Padding="10" Grid.Column="3" BackgroundColor="{DynamicResource CardBackgroundColor}" CornerRadius="12"
+                       BorderColor="{DynamicResource PrimaryColor}">
+                    <VerticalStackLayout>
+                        <Label Text="Missed Days" FontAttributes="Bold" />
+                        <Label x:Name="MissedDaysRangeLabel" FontSize="20" />
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+
+            <!-- Mood distribution bar (simple stacked labels) -->
+            <Label Text="Mood Distribution" FontAttributes="Bold" Margin="0,20,0,0" />
+            <VerticalStackLayout>
+                <Label x:Name="MoodDistributionLabel" />
+            </VerticalStackLayout>
+
+            <!-- Most frequent mood -->
+            <Label Text="Most Frequent Mood" FontAttributes="Bold" Margin="0,20,0,0" />
+            <Label x:Name="MostFrequentMoodLabel" />
+
+            <!-- Writing statistics -->
+            <Label Text="Writing Statistics" FontAttributes="Bold" Margin="0,20,0,0" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <Frame Padding="10" BackgroundColor="{DynamicResource CardBackgroundColor}" CornerRadius="12"
+                       BorderColor="{DynamicResource PrimaryColor}">
+                    <VerticalStackLayout>
+                        <Label Text="Total Words" FontAttributes="Bold" />
+                        <Label x:Name="TotalWordsLabel" FontSize="20" />
+                    </VerticalStackLayout>
+                </Frame>
+                <Frame Padding="10" Grid.Column="1" BackgroundColor="{DynamicResource CardBackgroundColor}" CornerRadius="12"
+                       BorderColor="{DynamicResource PrimaryColor}">
+                    <VerticalStackLayout>
+                        <Label Text="Average per Entry" FontAttributes="Bold" />
+                        <Label x:Name="AveragePerEntryLabel" FontSize="20" />
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

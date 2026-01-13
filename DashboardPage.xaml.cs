@@ -9,6 +9,21 @@ public partial class DashboardPage : ContentPage
     private readonly JournalService _journalService = new();
     private readonly ObservableCollection<JournalEntry> _recentEntries = new();
 
+    public static readonly string[] PositiveMoods =
+    {
+        "Happy", "Excited", "Relaxed", "Grateful", "Confident"
+    };
+
+    public static readonly string[] NeutralMoods =
+    {
+        "Calm", "Thoughtful", "Curious", "Nostalgic", "Bored"
+    };
+
+    public static readonly string[] NegativeMoods =
+    {
+        "Sad", "Angry", "Stressed", "Lonely", "Anxious"
+    };
+
     public DashboardPage()
     {
         InitializeComponent();
@@ -35,9 +50,22 @@ public partial class DashboardPage : ContentPage
         {
             CurrentStreakLabel.Text = "0 days";
             LongestStreakLabel.Text = "0 days";
-            MissedDaysLabel.Text = "0";
+            AverageWordsLabel.Text = "0";
+
+            PositivePercentLabel.Text = "0%";
+            PositiveCountLabel.Text = "(0 entries)";
+            NeutralPercentLabel.Text = "0%";
+            NeutralCountLabel.Text = "(0 entries)";
+            NegativePercentLabel.Text = "0%";
+            NegativeCountLabel.Text = "(0 entries)";
+            MissedDaysLabel.Text = "Missed Days: 0";
             return;
         }
+
+        // Average words per entry
+        int totalWords = ordered.Sum(e => CountWords(e.Content));
+        double average = totalWords / (double)ordered.Count;
+        AverageWordsLabel.Text = Math.Round(average).ToString("0");
 
         // Use distinct dates for streak calculations
         var dates = ordered
@@ -94,6 +122,40 @@ public partial class DashboardPage : ContentPage
 
         CurrentStreakLabel.Text = $"{currentStreak} day(s)";
         LongestStreakLabel.Text = $"{longestStreak} day(s)";
-        MissedDaysLabel.Text = missedDays.ToString();
+        MissedDaysLabel.Text = $"Missed Days: {missedDays}";
+
+        // Mood distribution based on primary mood
+        int positive = 0, neutral = 0, negative = 0;
+        foreach (var entry in ordered)
+        {
+            var mood = (entry.PrimaryMood ?? string.Empty).Trim();
+            if (PositiveMoods.Contains(mood, StringComparer.OrdinalIgnoreCase))
+                positive++;
+            else if (NeutralMoods.Contains(mood, StringComparer.OrdinalIgnoreCase))
+                neutral++;
+            else if (NegativeMoods.Contains(mood, StringComparer.OrdinalIgnoreCase))
+                negative++;
+        }
+
+        int moodTotal = positive + neutral + negative;
+        if (moodTotal == 0)
+            moodTotal = 1; // avoid divide by zero
+
+        PositivePercentLabel.Text = $"{positive * 100 / moodTotal}%";
+        PositiveCountLabel.Text = $"({positive} entries)";
+        NeutralPercentLabel.Text = $"{neutral * 100 / moodTotal}%";
+        NeutralCountLabel.Text = $"({neutral} entries)";
+        NegativePercentLabel.Text = $"{negative * 100 / moodTotal}%";
+        NegativeCountLabel.Text = $"({negative} entries)";
+    }
+
+    public static int CountWords(string? text)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+            return 0;
+
+        return text
+            .Split(' ', StringSplitOptions.RemoveEmptyEntries)
+            .Length;
     }
 }

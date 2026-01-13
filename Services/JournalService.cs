@@ -1,50 +1,73 @@
+using JournalApp.Data;
 using JournalApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace JournalApp.Services;
 
 /// <summary>
-/// Simple in-memory journal service. For the coursework you can later
-/// replace the in-memory list with the SQLite DbContext (AppDbContext).
+/// Journal service backed by local SQLite (AppDbContext).
 /// </summary>
 public class JournalService
 {
-    // Static so all pages share the same in-memory data for now
-    private static readonly List<JournalEntry> entries = new();
+    private static bool _databaseInitialized;
 
-    public Task<List<JournalEntry>> GetEntriesAsync()
+    private static void EnsureDatabase()
     {
-        var ordered = entries
-            .OrderByDescending(e => e.EntryDate)
-            .ToList();
+        if (_databaseInitialized)
+            return;
 
-        return Task.FromResult(ordered);
+        using var db = new AppDbContext();
+        db.Database.EnsureCreated();
+        _databaseInitialized = true;
     }
 
-    public Task<JournalEntry?> GetEntryByIdAsync(int id)
+    public async Task<List<JournalEntry>> GetEntriesAsync()
     {
-        return Task.FromResult(entries.FirstOrDefault(e => e.Id == id));
+        EnsureDatabase();
+        await using var db = new AppDbContext();
+
+        return await db.JournalEntries
+            .OrderByDescending(e => e.EntryDate)
+            .ToListAsync();
+    }
+
+    public async Task<JournalEntry?> GetEntryByIdAsync(int id)
+    {
+        EnsureDatabase();
+        await using var db = new AppDbContext();
+        return await db.JournalEntries.FirstOrDefaultAsync(e => e.Id == id);
     }
 
     /// <summary>
     /// Get the entry for a specific calendar date (one entry per day).
     /// </summary>
-    public Task<JournalEntry?> GetEntryByDateAsync(DateTime date)
+    public async Task<JournalEntry?> GetEntryByDateAsync(DateTime date)
     {
+        EnsureDatabase();
+        await using var db = new AppDbContext();
+
         var target = date.Date;
-        var entry = entries.FirstOrDefault(e => e.EntryDate.Date == target);
-        return Task.FromResult(entry);
+        return await db.JournalEntries.FirstOrDefaultAsync(e => e.EntryDate.Date == target);
     }
 
-    public Task AddEntryAsync(JournalEntry entry)
+    public async Task AddEntryAsync(JournalEntry entry)
     {
-        entry.Id = entries.Count > 0 ? entries.Max(e => e.Id) + 1 : 1;
-        entries.Add(entry);
-        return Task.CompletedTask;
+        EnsureDatabase();
+        await using var db = new AppDbContext();
+
+        entry.CreatedAt = DateTime.Now;
+        entry.UpdatedAt = entry.CreatedAt;
+
+        db.JournalEntries.Add(entry);
+        await db.SaveChangesAsync();
     }
 
-    public Task UpdateEntryAsync(JournalEntry entry)
+    public async Task UpdateEntryAsync(JournalEntry entry)
     {
-        var existing = entries.FirstOrDefault(e => e.Id == entry.Id);
+        EnsureDatabase();
+        await using var db = new AppDbContext();
+
+        var existing = await db.JournalEntries.FirstOrDefaultAsync(e => e.Id == entry.Id);
         if (existing != null)
         {
             existing.Title = entry.Title;
@@ -53,17 +76,22 @@ public class JournalService
             existing.SecondaryMoods = entry.SecondaryMoods;
             existing.Tags = entry.Tags;
             existing.EntryDate = entry.EntryDate;
-            existing.UpdatedAt = entry.UpdatedAt;
+            existing.UpdatedAt = DateTime.Now;
+
+            await db.SaveChangesAsync();
         }
-        return Task.CompletedTask;
     }
 
-    public Task DeleteEntryAsync(int id)
+    public async Task DeleteEntryAsync(int id)
     {
-        var entry = entries.FirstOrDefault(e => e.Id == id);
-        if (entry != null)
-            entries.Remove(entry);
+        EnsureDatabase();
+        await using var db = new AppDbContext();
 
-        return Task.CompletedTask;
+        var entry = await db.JournalEntries.FirstOrDefaultAsync(e => e.Id == id);
+        if (entry != null)
+        {
+            db.JournalEntries.Remove(entry);
+            await db.SaveChangesAsync();
+        }
     }
 }
