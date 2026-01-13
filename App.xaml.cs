@@ -2,13 +2,16 @@
 
 public partial class App : Application
 {
-	public App()
-	{
-		InitializeComponent();
-	}
+    public App()
+    {
+        InitializeComponent();
+    }
 
-	protected override Window CreateWindow(IActivationState? activationState)
-	{
-		return new Window(new MainPage()) { Title = "JournalApp" };
-	}
+    protected override Window CreateWindow(IActivationState? activationState)
+    {
+        return new Window(new AppShell())
+        {
+            Title = "JournalApp"
+        };
+    }
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JournalApp.AnalyticsPage"
+             Title="Analytics">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="12">
+            <Label Text="Analytics" Style="{StaticResource TitleLabelStyle}" />
+            <Label Text="(Placeholder) Implement mood distribution, tag breakdown, and word count trends here." />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

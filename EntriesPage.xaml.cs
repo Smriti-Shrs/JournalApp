@@ -1,0 +1,77 @@
+using System.Collections.ObjectModel;
+using JournalApp.Models;
+using JournalApp.Services;
+
+namespace JournalApp;
+
+public partial class EntriesPage : ContentPage
+{
+    private readonly JournalService _journalService = new();
+    private readonly ObservableCollection<JournalEntry> _entries = new();
+    private readonly List<JournalEntry> _allEntries = new();
+
+    public EntriesPage()
+    {
+        InitializeComponent();
+
+        EntriesCollectionView.ItemsSource = _entries;
+
+        // Simple mood filter list (optional)
+        MoodFilterPicker.ItemsSource = new[]
+        {
+            "Happy","Excited","Relaxed","Grateful","Confident",
+            "Calm","Thoughtful","Curious","Nostalgic","Bored",
+            "Sad","Angry","Stressed","Lonely","Anxious"
+        };
+
+        SearchEntry.TextChanged += OnFilterChanged;
+        MoodFilterPicker.SelectedIndexChanged += OnFilterChanged;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        _entries.Clear();
+        _allEntries.Clear();
+
+        var entries = await _journalService.GetEntriesAsync();
+        _allEntries.AddRange(entries);
+
+        ApplyFilter();
+    }
+
+    private void OnFilterChanged(object? sender, EventArgs e)
+    {
+        ApplyFilter();
+    }
+
+    private void ApplyFilter()
+    {
+        if (_allEntries.Count == 0)
+            return;
+
+        var search = (SearchEntry.Text ?? string.Empty).Trim().ToLowerInvariant();
+        var mood = MoodFilterPicker.SelectedItem as string;
+
+        var filtered = _allEntries.AsEnumerable();
+
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            filtered = filtered.Where(e =>
+                (e.Title ?? string.Empty).ToLowerInvariant().Contains(search) ||
+                (e.Content ?? string.Empty).ToLowerInvariant().Contains(search));
+        }
+
+        if (!string.IsNullOrWhiteSpace(mood))
+        {
+            filtered = filtered.Where(e =>
+                string.Equals(e.PrimaryMood, mood, StringComparison.OrdinalIgnoreCase) ||
+                (e.SecondaryMoods ?? string.Empty).Contains(mood, StringComparison.OrdinalIgnoreCase));
+        }
+
+        _entries.Clear();
+        foreach (var entry in filtered)
+            _entries.Add(entry);
+    }
+}

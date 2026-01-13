@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JournalApp.DashboardPage"
+             Title="Dashboard">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+            <Label Text="Dashboard" Style="{StaticResource TitleLabelStyle}" />
+
+            <Label Text="Quick Stats" FontAttributes="Bold" />
+            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto">
+                <Frame Padding="10" Margin="5" BackgroundColor="{DynamicResource CardBackgroundColor}"
+                       BorderColor="{DynamicResource PrimaryColor}" CornerRadius="12">
+                    <VerticalStackLayout>
+                        <Label Text="Total Entries" FontAttributes="Bold" />
+                        <Label x:Name="TotalEntriesLabel" Text="0" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame Padding="10" Margin="5" Grid.Column="1" BackgroundColor="{DynamicResource CardBackgroundColor}"
+                       BorderColor="{DynamicResource PrimaryColor}" CornerRadius="12">
+                    <VerticalStackLayout>
+                        <Label Text="Current Streak" FontAttributes="Bold" />
+                        <Label x:Name="CurrentStreakLabel" Text="0 days" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame Padding="10" Margin="5" Grid.Row="1" BackgroundColor="{DynamicResource CardBackgroundColor}"
+                       BorderColor="{DynamicResource PrimaryColor}" CornerRadius="12">
+                    <VerticalStackLayout>
+                        <Label Text="Longest Streak" FontAttributes="Bold" />
+                        <Label x:Name="LongestStreakLabel" Text="0 days" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame Padding="10" Margin="5" Grid.Row="1" Grid.Column="1" BackgroundColor="{DynamicResource CardBackgroundColor}"
+                       BorderColor="{DynamicResource PrimaryColor}" CornerRadius="12">
+                    <VerticalStackLayout>
+                        <Label Text="Missed Days" FontAttributes="Bold" />
+                        <Label x:Name="MissedDaysLabel" Text="0" />
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+
+            <Label Text="Recent Entries" FontAttributes="Bold" Margin="0,20,0,0" />
+            <CollectionView x:Name="RecentEntriesCollectionView" HeightRequest="200">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="5" ColumnDefinitions="Auto,*">
+                            <Label Text="{Binding EntryDate, StringFormat='{}{0:yyyy-MM-dd}'}"
+                                   FontAttributes="Bold"
+                                   Margin="0,0,10,0" />
+                            <Label Grid.Column="1"
+                                   Text="{Binding Title}"
+                                   LineBreakMode="TailTruncation" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

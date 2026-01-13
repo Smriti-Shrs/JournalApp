@@ -2,18 +2,37 @@ using JournalApp.Models;
 
 namespace JournalApp.Services;
 
+/// <summary>
+/// Simple in-memory journal service. For the coursework you can later
+/// replace the in-memory list with the SQLite DbContext (AppDbContext).
+/// </summary>
 public class JournalService
 {
-    private readonly List<JournalEntry> entries = new();
+    // Static so all pages share the same in-memory data for now
+    private static readonly List<JournalEntry> entries = new();
 
     public Task<List<JournalEntry>> GetEntriesAsync()
     {
-        return Task.FromResult(entries.OrderByDescending(e => e.EntryDate).ToList());
+        var ordered = entries
+            .OrderByDescending(e => e.EntryDate)
+            .ToList();
+
+        return Task.FromResult(ordered);
     }
 
     public Task<JournalEntry?> GetEntryByIdAsync(int id)
     {
         return Task.FromResult(entries.FirstOrDefault(e => e.Id == id));
+    }
+
+    /// <summary>
+    /// Get the entry for a specific calendar date (one entry per day).
+    /// </summary>
+    public Task<JournalEntry?> GetEntryByDateAsync(DateTime date)
+    {
+        var target = date.Date;
+        var entry = entries.FirstOrDefault(e => e.EntryDate.Date == target);
+        return Task.FromResult(entry);
     }
 
     public Task AddEntryAsync(JournalEntry entry)
@@ -31,6 +50,9 @@ public class JournalService
             existing.Title = entry.Title;
             existing.Content = entry.Content;
             existing.PrimaryMood = entry.PrimaryMood;
+            existing.SecondaryMoods = entry.SecondaryMoods;
+            existing.Tags = entry.Tags;
+            existing.EntryDate = entry.EntryDate;
             existing.UpdatedAt = entry.UpdatedAt;
         }
         return Task.CompletedTask;

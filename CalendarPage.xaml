@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JournalApp.CalendarPage"
+             Title="Calendar">
+
+    <VerticalStackLayout Padding="20" Spacing="12">
+        <Label Text="Calendar" Style="{StaticResource TitleLabelStyle}" />
+        <Label Text="(Placeholder) Implement a more advanced calendar view here." />
+
+        <DatePicker x:Name="CalendarDatePicker" />
+        <Label x:Name="SelectedDateLabel" Text="Select a date to see entry info." />
+    </VerticalStackLayout>
+</ContentPage>
