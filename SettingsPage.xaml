@@ -7,7 +7,33 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="12">
             <Label Text="Settings" Style="{StaticResource TitleLabelStyle}" />
-            <Label Text="(Placeholder) Add PIN/password, export options, and preferences here." />
+
+            <!-- Theme toggle -->
+            <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   CornerRadius="10"
+                   Padding="10">
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Label Text="Dark Theme" VerticalOptions="Center" />
+                    <Switch x:Name="DarkThemeSwitch"
+                            Toggled="OnDarkThemeToggled" />
+                </HorizontalStackLayout>
+            </Frame>
+
+            <!-- Export journals as PDF -->
+            <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   CornerRadius="10"
+                   Padding="10">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Export Journals as PDF" FontAttributes="Bold" />
+                    <Grid ColumnDefinitions="Auto,*,Auto,*" ColumnSpacing="6">
+                        <Label Text="From:" VerticalOptions="Center" />
+                        <DatePicker x:Name="ExportFromDatePicker" Grid.Column="1" />
+                        <Label Text="To:" Grid.Column="2" VerticalOptions="Center" Margin="10,0,0,0" />
+                        <DatePicker x:Name="ExportToDatePicker" Grid.Column="3" />
+                    </Grid>
+                    <Button Text="Export PDF" Clicked="OnExportPdfClicked" />
+                </VerticalStackLayout>
+            </Frame>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -9,8 +9,6 @@ public partial class MainPage : ContentPage
     private readonly JournalService _journalService = new();
     private readonly ObservableCollection<JournalEntry> _entries = new();
 
-    private bool _isDarkTheme;
-
     private readonly string[] _allMoods = new[]
     {
         // Positive
@@ -26,7 +24,7 @@ public partial class MainPage : ContentPage
         InitializeComponent();
 
         EntryDatePicker.Date = DateTime.Today;
-        ApplyTheme();
+        ThemeService.SetTheme(false); // start with light theme by default
 
         // Populate mood pickers
         PrimaryMoodPicker.ItemsSource = _allMoods;
@@ -188,27 +186,6 @@ public partial class MainPage : ContentPage
 
     private void OnToggleThemeClicked(object sender, EventArgs e)
     {
-        _isDarkTheme = !_isDarkTheme;
-        ApplyTheme();
-    }
-
-    private void ApplyTheme()
-    {
-        var resources = Application.Current?.Resources;
-        if (resources is null)
-            return;
-
-        if (_isDarkTheme)
-        {
-            resources["PageBackgroundColor"] = Color.FromArgb("#121212");
-            resources["CardBackgroundColor"] = Color.FromArgb("#1E1E1E");
-            resources["PrimaryTextColor"] = Colors.White;
-        }
-        else
-        {
-            resources["PageBackgroundColor"] = Color.FromArgb("#F5F5F5");
-            resources["CardBackgroundColor"] = Colors.White;
-            resources["PrimaryTextColor"] = Color.FromArgb("#222222");
-        }
+        ThemeService.ToggleTheme();
     }
 }

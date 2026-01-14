@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using JournalApp.Services;
+using QuestPDF.Infrastructure;
 
 namespace JournalApp;
 
@@ -7,6 +8,8 @@ public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {
+        QuestPDF.Settings.License = LicenseType.Community;
+
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
