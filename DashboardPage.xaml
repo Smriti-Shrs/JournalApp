@@ -5,131 +5,162 @@
              Title="Dashboard">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="16">
-            <!-- Gradient header like the sample -->
-            <Frame Padding="16" CornerRadius="18" HasShadow="False" Margin="0,0,0,10">
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <!-- Enhanced Header -->
+            <Frame Padding="20" CornerRadius="18" HasShadow="False" Margin="0">
                 <Frame.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                        <GradientStop Color="#5A60F2" Offset="0.0" />
-                        <GradientStop Color="#9F5AF2" Offset="1.0" />
+                        <GradientStop Color="#7c3aed" Offset="0.0" />
+                        <GradientStop Color="#a855f7" Offset="1.0" />
                     </LinearGradientBrush>
                 </Frame.Background>
                 <VerticalStackLayout>
-                    <Label Text="Your Journal Dashboard"
-                           FontSize="24"
+                    <Label Text="📔 Your Journal Dashboard"
+                           FontSize="28"
                            FontAttributes="Bold"
                            TextColor="White" />
                     <Label Text="Track your thoughts, moods, and journaling progress"
                            FontSize="14"
-                           TextColor="White" />
+                           TextColor="White"
+                           Opacity="0.95" />
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- Summary stat cards -->
-            <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="10">
+            <!-- Stat Cards Grid -->
+            <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="12" RowSpacing="12">
                 <!-- Total Entries -->
-                <Frame Padding="10" BackgroundColor="{DynamicResource CardBackgroundColor}" CornerRadius="16">
+                <Frame Padding="12" CornerRadius="14" HasShadow="True" Margin="0">
                     <Frame.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                            <GradientStop Color="#5A60F2" Offset="0.0" />
-                            <GradientStop Color="#9F5AF2" Offset="1.0" />
+                            <GradientStop Color="#7c3aed" Offset="0.0" />
+                            <GradientStop Color="#a855f7" Offset="1.0" />
                         </LinearGradientBrush>
                     </Frame.Background>
                     <VerticalStackLayout>
-                        <Label Text="Total Entries" FontAttributes="Bold" TextColor="White" />
-                        <Label x:Name="TotalEntriesLabel" Text="0" FontSize="24" TextColor="White" />
+                        <Label Text="📝 Total Entries" FontAttributes="Bold" TextColor="White" FontSize="12" />
+                        <Label x:Name="TotalEntriesLabel" Text="0" FontSize="28" FontAttributes="Bold" TextColor="White" />
                     </VerticalStackLayout>
                 </Frame>
 
                 <!-- Current Streak -->
-                <Frame Padding="10" Grid.Column="1" BackgroundColor="{DynamicResource CardBackgroundColor}" CornerRadius="16">
+                <Frame Padding="12" Grid.Column="1" CornerRadius="14" HasShadow="True" Margin="0">
                     <Frame.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                            <GradientStop Color="#FF6F61" Offset="0.0" />
-                            <GradientStop Color="#FF8A65" Offset="1.0" />
+                            <GradientStop Color="#ec4899" Offset="0.0" />
+                            <GradientStop Color="#f43f5e" Offset="1.0" />
                         </LinearGradientBrush>
                     </Frame.Background>
                     <VerticalStackLayout>
-                        <Label Text="Current Streak" FontAttributes="Bold" TextColor="White" />
-                        <Label x:Name="CurrentStreakLabel" Text="0 days" FontSize="24" TextColor="White" />
+                        <Label Text="🔥 Current Streak" FontAttributes="Bold" TextColor="White" FontSize="12" />
+                        <Label x:Name="CurrentStreakLabel" Text="0 days" FontSize="28" FontAttributes="Bold" TextColor="White" />
                     </VerticalStackLayout>
                 </Frame>
 
                 <!-- Longest Streak -->
-                <Frame Padding="10" Grid.Column="2" BackgroundColor="{DynamicResource CardBackgroundColor}" CornerRadius="16">
+                <Frame Padding="12" Grid.Column="2" CornerRadius="14" HasShadow="True" Margin="0">
                     <Frame.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                            <GradientStop Color="#42A5F5" Offset="0.0" />
-                            <GradientStop Color="#26C6DA" Offset="1.0" />
+                            <GradientStop Color="#3b82f6" Offset="0.0" />
+                            <GradientStop Color="#0ea5e9" Offset="1.0" />
                         </LinearGradientBrush>
                     </Frame.Background>
                     <VerticalStackLayout>
-                        <Label Text="Longest Streak" FontAttributes="Bold" TextColor="White" />
-                        <Label x:Name="LongestStreakLabel" Text="0 days" FontSize="24" TextColor="White" />
+                        <Label Text="⭐ Longest Streak" FontAttributes="Bold" TextColor="White" FontSize="12" />
+                        <Label x:Name="LongestStreakLabel" Text="0 days" FontSize="28" FontAttributes="Bold" TextColor="White" />
                     </VerticalStackLayout>
                 </Frame>
 
                 <!-- Average Words -->
-                <Frame Padding="10" Grid.Column="3" BackgroundColor="{DynamicResource CardBackgroundColor}" CornerRadius="16">
+                <Frame Padding="12" Grid.Column="3" CornerRadius="14" HasShadow="True" Margin="0">
                     <Frame.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                            <GradientStop Color="#66BB6A" Offset="0.0" />
-                            <GradientStop Color="#9CCC65" Offset="1.0" />
+                            <GradientStop Color="#10b981" Offset="0.0" />
+                            <GradientStop Color="#14b8a6" Offset="1.0" />
                         </LinearGradientBrush>
                     </Frame.Background>
                     <VerticalStackLayout>
-                        <Label Text="Average Words" FontAttributes="Bold" TextColor="White" />
-                        <Label x:Name="AverageWordsLabel" Text="0" FontSize="24" TextColor="White" />
+                        <Label Text="📊 Avg Words" FontAttributes="Bold" TextColor="White" FontSize="12" />
+                        <Label x:Name="AverageWordsLabel" Text="0" FontSize="28" FontAttributes="Bold" TextColor="White" />
                     </VerticalStackLayout>
                 </Frame>
             </Grid>
 
-            <Label Text="Mood Distribution" FontAttributes="Bold" Margin="0,20,0,0" />
-
-            <VerticalStackLayout Spacing="6">
-                <Frame Padding="8" BackgroundColor="{DynamicResource CardBackgroundColor}"
-                       BorderColor="{DynamicResource PrimaryColor}" CornerRadius="10">
-                    <Grid ColumnDefinitions="Auto,*,Auto">
-                        <Label Text="Positive" FontAttributes="Bold" />
-                        <Label Grid.Column="1" x:Name="PositivePercentLabel" HorizontalOptions="EndAndExpand" />
-                        <Label Grid.Column="2" x:Name="PositiveCountLabel" FontSize="12" />
-                    </Grid>
-                </Frame>
-                <Frame Padding="8" BackgroundColor="{DynamicResource CardBackgroundColor}"
-                       BorderColor="{DynamicResource PrimaryColor}" CornerRadius="10">
-                    <Grid ColumnDefinitions="Auto,*,Auto">
-                        <Label Text="Neutral" FontAttributes="Bold" />
-                        <Label Grid.Column="1" x:Name="NeutralPercentLabel" HorizontalOptions="EndAndExpand" />
-                        <Label Grid.Column="2" x:Name="NeutralCountLabel" FontSize="12" />
-                    </Grid>
-                </Frame>
-                <Frame Padding="8" BackgroundColor="{DynamicResource CardBackgroundColor}"
-                       BorderColor="{DynamicResource PrimaryColor}" CornerRadius="10">
-                    <Grid ColumnDefinitions="Auto,*,Auto">
-                        <Label Text="Negative" FontAttributes="Bold" />
-                        <Label Grid.Column="1" x:Name="NegativePercentLabel" HorizontalOptions="EndAndExpand" />
-                        <Label Grid.Column="2" x:Name="NegativeCountLabel" FontSize="12" />
-                    </Grid>
-                </Frame>
-            </VerticalStackLayout>
-
-            <Label x:Name="MissedDaysLabel" Text="Missed Days: 0" Margin="0,10,0,0" />
-
-            <Label Text="Recent Entries" FontAttributes="Bold" Margin="0,20,0,0" />
-            <CollectionView x:Name="RecentEntriesCollectionView" HeightRequest="200">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Padding="5" ColumnDefinitions="Auto,*">
-                            <Label Text="{Binding EntryDate, StringFormat='{}{0:yyyy-MM-dd}'}"
-                                   FontAttributes="Bold"
-                                   Margin="0,0,10,0" />
-                            <Label Grid.Column="1"
-                                   Text="{Binding Title}"
-                                   LineBreakMode="TailTruncation" />
+            <!-- Streaks Details Section -->
+            <Frame Padding="16" CornerRadius="14" HasShadow="False" BorderColor="#7c3aed" BorderThickness="2" Margin="0">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="📈 Streaks Analytics" FontAttributes="Bold" FontSize="18" />
+                    <Frame Padding="12" CornerRadius="10" BackgroundColor="#fef3c7" HasShadow="False" Margin="0">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                            <Label Text="📅" FontSize="18" />
+                            <VerticalStackLayout Grid.Column="1">
+                                <Label Text="Keep your streak alive!" FontAttributes="Bold" TextColor="#92400e" />
+                                <Label x:Name="MissedDaysLabel" Text="Missed Days: 0" FontSize="12" TextColor="#b45309" />
+                            </VerticalStackLayout>
                         </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                    </Frame>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Mood Distribution Section -->
+            <Frame Padding="16" CornerRadius="14" HasShadow="False" BorderColor="#f59e0b" BorderThickness="2" Margin="0">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="😊 Mood Distribution" FontAttributes="Bold" FontSize="18" />
+                    
+                    <VerticalStackLayout Spacing="8">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+                            <Label Text="😊 Positive" FontAttributes="Bold" VerticalOptions="Center" />
+                            <ProgressBar Grid.Column="1" x:Name="PositiveProgressBar" Progress="0" ProgressColor="#10b981" />
+                            <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="4" HorizontalOptions="End">
+                                <Label x:Name="PositivePercentLabel" Text="0%" FontAttributes="Bold" VerticalOptions="Center" />
+                                <Label x:Name="PositiveCountLabel" Text="(0)" FontSize="12" VerticalOptions="Center" />
+                            </StackLayout>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+                            <Label Text="😐 Neutral" FontAttributes="Bold" VerticalOptions="Center" />
+                            <ProgressBar Grid.Column="1" x:Name="NeutralProgressBar" Progress="0" ProgressColor="#6366f1" />
+                            <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="4" HorizontalOptions="End">
+                                <Label x:Name="NeutralPercentLabel" Text="0%" FontAttributes="Bold" VerticalOptions="Center" />
+                                <Label x:Name="NeutralCountLabel" Text="(0)" FontSize="12" VerticalOptions="Center" />
+                            </StackLayout>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+                            <Label Text="😢 Negative" FontAttributes="Bold" VerticalOptions="Center" />
+                            <ProgressBar Grid.Column="1" x:Name="NegativeProgressBar" Progress="0" ProgressColor="#ef4444" />
+                            <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="4" HorizontalOptions="End">
+                                <Label x:Name="NegativePercentLabel" Text="0%" FontAttributes="Bold" VerticalOptions="Center" />
+                                <Label x:Name="NegativeCountLabel" Text="(0)" FontSize="12" VerticalOptions="Center" />
+                            </StackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Recent Entries Section -->
+            <Frame Padding="16" CornerRadius="14" HasShadow="False" BorderColor="#10b981" BorderThickness="2" Margin="0">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="📝 Recent Entries" FontAttributes="Bold" FontSize="18" />
+                    <CollectionView x:Name="RecentEntriesCollectionView" HeightRequest="200">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Padding="10" Margin="0,4" CornerRadius="10" HasShadow="False" BorderColor="#e5e7eb" BorderThickness="1">
+                                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                                        <Label Text="{Binding EntryDate, StringFormat='{}{0:MMM dd}'}"
+                                               FontAttributes="Bold"
+                                               TextColor="#7c3aed"
+                                               FontSize="12" />
+                                        <Label Grid.Column="1"
+                                               Text="{Binding Title}"
+                                               LineBreakMode="TailTruncation"
+                                               FontSize="14" />
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Frame>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

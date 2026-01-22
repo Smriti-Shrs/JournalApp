@@ -12,12 +12,12 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>6ljt0n7p9h</Fingerprint>
-      <Integrity>anQ0BwWEVExVrLm+Vir755qCCZw/zIDBqH5HLZX9Vg0=</Integrity>
+      <Fingerprint>o2099a8901</Fingerprint>
+      <Integrity>oDnEjLHwjXsFMcgGqZsTmgkdwtMJ7In9UtJdGXkyGy8=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <FileLength>2760</FileLength>
-      <LastWriteTime>Wed, 07 Jan 2026 14:39:35 GMT</LastWriteTime>
+      <FileLength>7259</FileLength>
+      <LastWriteTime>Thu, 22 Jan 2026 08:33:32 GMT</LastWriteTime>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\app.css'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))">
@@ -32,12 +32,12 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>aok5jbme4z</Fingerprint>
-      <Integrity>Fil9LY4qpLzI5I3M+JHcIGoFoiVJoLAZMwIZCSDX77k=</Integrity>
+      <Fingerprint>5usjk8k9lw</Fingerprint>
+      <Integrity>vUzmsAuKROktB97x33WROM0ELnSobciIs3SqEpYYLYk=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <FileLength>5127</FileLength>
-      <LastWriteTime>Wed, 07 Jan 2026 14:04:34 GMT</LastWriteTime>
+      <FileLength>16576</FileLength>
+      <LastWriteTime>Thu, 22 Jan 2026 08:29:32 GMT</LastWriteTime>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\index.html'))">

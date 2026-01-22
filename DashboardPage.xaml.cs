@@ -141,12 +141,21 @@ public partial class DashboardPage : ContentPage
         if (moodTotal == 0)
             moodTotal = 1; // avoid divide by zero
 
-        PositivePercentLabel.Text = $"{positive * 100 / moodTotal}%";
-        PositiveCountLabel.Text = $"({positive} entries)";
-        NeutralPercentLabel.Text = $"{neutral * 100 / moodTotal}%";
-        NeutralCountLabel.Text = $"({neutral} entries)";
-        NegativePercentLabel.Text = $"{negative * 100 / moodTotal}%";
-        NegativeCountLabel.Text = $"({negative} entries)";
+        double positivePercent = positive * 100.0 / moodTotal;
+        double neutralPercent = neutral * 100.0 / moodTotal;
+        double negativePercent = negative * 100.0 / moodTotal;
+
+        PositivePercentLabel.Text = $"{positivePercent:F0}%";
+        PositiveCountLabel.Text = $"({positive})";
+        PositiveProgressBar.Progress = positivePercent / 100.0;
+
+        NeutralPercentLabel.Text = $"{neutralPercent:F0}%";
+        NeutralCountLabel.Text = $"({neutral})";
+        NeutralProgressBar.Progress = neutralPercent / 100.0;
+
+        NegativePercentLabel.Text = $"{negativePercent:F0}%";
+        NegativeCountLabel.Text = $"({negative})";
+        NegativeProgressBar.Progress = negativePercent / 100.0;
     }
 
     public static int CountWords(string? text)
