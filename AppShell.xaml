@@ -5,14 +5,36 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:JournalApp"
     FlyoutBehavior="Locked"
-    FlyoutBackgroundColor="#0D47A1"
+    FlyoutBackgroundColor="#f1f5f9"
     >
+    
+    <Shell.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="#0f172a" />
+            <Setter Property="FontFamily" Value="Arial" />
+        </Style>
+    </Shell.Resources>
+    
+    <!-- App Header -->
+    <Shell.FlyoutHeader>
+        <Grid BackgroundColor="#6366f1" Padding="16,12">
+            <Label Text="📔 JournalApp" 
+                   FontSize="16" 
+                   FontAttributes="Bold" 
+                   TextColor="White" 
+                   VerticalOptions="Center" />
+        </Grid>
+    </Shell.FlyoutHeader>
 
-    <!-- Force white text for navigation items -->
+    <!-- Navigation items styling -->
     <Shell.ItemTemplate>
         <DataTemplate>
-            <Grid Padding="12">
-                <Label Text="{Binding Title}" TextColor="White" />
+            <Grid Padding="16,12" BackgroundColor="Transparent">
+                <Label Text="{Binding Title}" 
+                       TextColor="#0f172a" 
+                       FontAttributes="None" 
+                       FontSize="15" 
+                       VerticalOptions="Center" />
             </Grid>
         </DataTemplate>
     </Shell.ItemTemplate>

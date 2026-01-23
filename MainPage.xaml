@@ -2,75 +2,112 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JournalApp.MainPage"
-             Title="JournalApp">
+             Title="New Entry"
+             BackgroundColor="#f8fafc">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Light/Dark" Priority="0" Order="Primary" Clicked="OnToggleThemeClicked" />
     </ContentPage.ToolbarItems>
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="12"
-                             BackgroundColor="{DynamicResource CardBackgroundColor}">
-            <Label Text="JournalApp" Style="{StaticResource TitleLabelStyle}" />
-
-            <!-- Calendar / date selection (one entry per day) -->
-            <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                <Label Text="Entry Date:" VerticalOptions="Center" />
-                <DatePicker x:Name="EntryDatePicker"
-                            HorizontalOptions="StartAndExpand" />
-            </HorizontalStackLayout>
+        <VerticalStackLayout Padding="20" Spacing="16">
+            <!-- Entry Date -->
+            <Frame Padding="16" CornerRadius="10" HasShadow="True" BackgroundColor="White" BorderColor="#e2e8f0">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="📅 Entry Date" FontAttributes="Bold" TextColor="#0f172a" FontSize="14" />
+                    <DatePicker x:Name="EntryDatePicker" FontSize="16" TextColor="#6366f1" />
+                </VerticalStackLayout>
+            </Frame>
 
             <!-- Title -->
-            <Frame BackgroundColor="White" BorderColor="{DynamicResource PrimaryColor}" CornerRadius="10" Padding="6">
-                <Entry x:Name="TitleEntry"
-                       Placeholder="Title"
-                       FontAttributes="Bold"
-                       BackgroundColor="Transparent" />
+            <Frame Padding="16" CornerRadius="10" HasShadow="True" BackgroundColor="White" BorderColor="#e2e8f0">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="📝 Title" FontAttributes="Bold" TextColor="#0f172a" FontSize="14" />
+                    <Entry x:Name="TitleEntry"
+                           Placeholder="Give your entry a title..."
+                           PlaceholderColor="#cbd5e1"
+                           FontSize="16"
+                           TextColor="#0f172a" />
+                </VerticalStackLayout>
             </Frame>
 
-            <!-- Mood selection -->
-            <Label Text="Primary Mood (required)" />
-            <Picker x:Name="PrimaryMoodPicker"
-                    Title="Select primary mood" />
-
-            <Label Text="Secondary Moods (optional, up to 2)" />
-            <HorizontalStackLayout Spacing="10">
-                <Picker x:Name="SecondaryMood1Picker"
-                        Title="Secondary mood 1" />
-                <Picker x:Name="SecondaryMood2Picker"
-                        Title="Secondary mood 2" />
-            </HorizontalStackLayout>
+            <!-- Mood Selection -->
+            <Frame Padding="16" CornerRadius="10" HasShadow="True" BackgroundColor="White" BorderColor="#e2e8f0">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="😊 Primary Mood (required)" FontAttributes="Bold" TextColor="#0f172a" FontSize="14" />
+                    <Border Stroke="#e2e8f0" StrokeThickness="1" BackgroundColor="White" Padding="8,4">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="6"/>
+                        </Border.StrokeShape>
+                        <Picker x:Name="PrimaryMoodPicker" Title="Select primary mood" FontSize="16" TextColor="#6366f1" BackgroundColor="Transparent" />
+                    </Border>
+                    
+                    <Label Text="😐 Secondary Moods (optional)" FontAttributes="Bold" Margin="0,8,0,0" TextColor="#0f172a" FontSize="14" />
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                        <Border Stroke="#e2e8f0" StrokeThickness="1" BackgroundColor="White" Padding="8,4">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="6"/>
+                            </Border.StrokeShape>
+                            <Picker x:Name="SecondaryMood1Picker" Title="Mood 1" FontSize="16" TextColor="#06b6d4" BackgroundColor="Transparent" />
+                        </Border>
+                        <Border Grid.Column="1" Stroke="#e2e8f0" StrokeThickness="1" BackgroundColor="White" Padding="8,4">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="6"/>
+                            </Border.StrokeShape>
+                            <Picker x:Name="SecondaryMood2Picker" Title="Mood 2" FontSize="16" TextColor="#06b6d4" BackgroundColor="Transparent" />
+                        </Border>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
 
             <!-- Tags -->
-            <Label Text="Tags (comma-separated, e.g. Work, Health)" />
-            <Frame BackgroundColor="White" BorderColor="{DynamicResource PrimaryColor}" CornerRadius="10" Padding="6">
-                <Entry x:Name="TagsEntry" Placeholder="Work, Health, Travel" BackgroundColor="Transparent" />
+            <Frame Padding="16" CornerRadius="10" HasShadow="True" BackgroundColor="White" BorderColor="#e2e8f0">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="🏷️ Tags (comma-separated)" FontAttributes="Bold" TextColor="#0f172a" FontSize="14" />
+                    <Entry x:Name="TagsEntry" 
+                           Placeholder="e.g. Work, Health, Travel" 
+                           PlaceholderColor="#cbd5e1"
+                           FontSize="16"
+                           TextColor="#0f172a" />
+                </VerticalStackLayout>
             </Frame>
 
-            <!-- Content editor -->
-            <Label Text="Entry" />
-            <Frame BackgroundColor="White" BorderColor="{DynamicResource PrimaryColor}" CornerRadius="10" Padding="6">
-                <Editor x:Name="EntryEditor"
-                        Placeholder="Write your journal entry here..."
-                        AutoSize="TextChanges"
-                        HeightRequest="200"
-                        BackgroundColor="Transparent" />
+            <!-- Content Editor -->
+            <Frame Padding="16" CornerRadius="10" HasShadow="True" BackgroundColor="White" BorderColor="#e2e8f0">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="📖 Your Entry" FontAttributes="Bold" TextColor="#0f172a" FontSize="14" />
+                    <Editor x:Name="EntryEditor"
+                            Placeholder="Write your journal entry here..."
+                            PlaceholderColor="#cbd5e1"
+                            AutoSize="TextChanges"
+                            HeightRequest="200"
+                            FontSize="16"
+                            TextColor="#0f172a" />
+                </VerticalStackLayout>
             </Frame>
 
             <!-- Actions -->
-            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+            <HorizontalStackLayout Spacing="12" HorizontalOptions="FillAndExpand">
                 <Button x:Name="SaveButton"
-                        Text="Save / Update"
-                        Clicked="OnSaveClicked" />
+                        Text="💾 Save Entry"
+                        Clicked="OnSaveClicked"
+                        BackgroundColor="#6366f1"
+                        TextColor="White"
+                        HorizontalOptions="FillAndExpand" />
                 <Button x:Name="DeleteButton"
-                        Text="Delete"
-                        Clicked="OnDeleteClicked" />
+                        Text="🗑️ Delete"
+                        Clicked="OnDeleteClicked"
+                        BackgroundColor="#f97316"
+                        TextColor="White"
+                        HorizontalOptions="FillAndExpand" />
             </HorizontalStackLayout>
 
-            <!-- Past entries list (simple timeline / list view) -->
-            <Label Text="Previous Entries"
+            <!-- Previous Entries Section -->
+            <Label Text="📚 Previous Entries"
                    FontAttributes="Bold"
-                   Margin="0,20,0,0" />
+                   FontSize="16"
+                   Margin="0,10,0,0"
+                   TextColor="#0f172a" />
 
             <CollectionView x:Name="EntriesCollectionView"
                             SelectionMode="Single"
@@ -78,14 +115,20 @@
                             HeightRequest="250">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Padding="5" ColumnDefinitions="Auto,*">
-                            <Label Text="{Binding EntryDate, StringFormat='{}{0:yyyy-MM-dd}'}"
-                                   FontAttributes="Bold"
-                                   Margin="0,0,10,0" />
-                            <Label Grid.Column="1"
-                                   Text="{Binding Title}"
-                                   LineBreakMode="TailTruncation" />
-                        </Grid>
+                        <Frame Padding="12" Margin="0,4" CornerRadius="10" HasShadow="True" BackgroundColor="White">
+                            <Grid Padding="0" ColumnDefinitions="Auto,*">
+                                <Label Text="{Binding EntryDate, StringFormat='{}{0:MMM dd}'}"
+                                       FontAttributes="Bold"
+                                       TextColor="#6366f1"
+                                       FontSize="12"
+                                       Margin="0,0,12,0" />
+                                <Label Grid.Column="1"
+                                       Text="{Binding Title}"
+                                       LineBreakMode="TailTruncation"
+                                       FontSize="14"
+                                       TextColor="#0f172a" />
+                            </Grid>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

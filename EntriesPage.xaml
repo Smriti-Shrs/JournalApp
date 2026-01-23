@@ -2,30 +2,31 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JournalApp.EntriesPage"
-             Title="My Entries">
+             Title="My Entries"
+             BackgroundColor="#f8fafc">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="12"
-                             BackgroundColor="{DynamicResource CardBackgroundColor}">
-            <Label Text="My Entries" Style="{StaticResource TitleLabelStyle}" />
-
+        <VerticalStackLayout Padding="20" Spacing="16">
             <!-- Search & filter -->
-            <Entry x:Name="SearchEntry" Placeholder="Search by title or content" />
-            <Picker x:Name="MoodFilterPicker" Title="Filter by mood (optional)" />
+            <Frame Padding="12" CornerRadius="10" HasShadow="True" BackgroundColor="White">
+                <VerticalStackLayout Spacing="12">
+                    <Entry x:Name="SearchEntry" Placeholder="Search by title or content" />
+                    <Picker x:Name="MoodFilterPicker" Title="Filter by mood (optional)" />
+                </VerticalStackLayout>
+            </Frame>
 
             <CollectionView x:Name="EntriesCollectionView"
                             SelectionMode="Single"
                             HeightRequest="400">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Margin="0,4" Padding="10" BackgroundColor="{DynamicResource CardBackgroundColor}"
-                               BorderColor="{DynamicResource PrimaryColor}" CornerRadius="10">
-                            <VerticalStackLayout>
-                                <Label Text="{Binding EntryDate, StringFormat='{}{0:yyyy-MM-dd}'}"
-                                       FontAttributes="Bold" />
-                                <Label Text="{Binding Title}" />
-                                <Label Text="{Binding PrimaryMood}" FontAttributes="Italic" />
-                                <Label Text="{Binding Tags}" FontSize="12" TextColor="{DynamicResource SecondaryTextColor}" />
+                        <Frame Margin="0,4" Padding="12" CornerRadius="10" HasShadow="True" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="6">
+                                <Label Text="{Binding EntryDate, StringFormat='{}{0:MMM dd, yyyy}'}"
+                                       FontAttributes="Bold" TextColor="#6366f1" FontSize="14" />
+                                <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="16" TextColor="#0f172a" />
+                                <Label Text="{Binding PrimaryMood}" FontAttributes="Italic" TextColor="#6b7280" FontSize="12" />
+                                <Label Text="{Binding Tags}" FontSize="11" TextColor="#9ca3af" />
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>

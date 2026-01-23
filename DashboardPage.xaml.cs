@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using JournalApp.Models;
 using JournalApp.Services;
 
@@ -6,7 +7,7 @@ namespace JournalApp;
 
 public partial class DashboardPage : ContentPage
 {
-    private readonly JournalService _journalService = new();
+    private readonly JournalService _journalService;
     private readonly ObservableCollection<JournalEntry> _recentEntries = new();
 
     public static readonly string[] PositiveMoods =
@@ -27,7 +28,7 @@ public partial class DashboardPage : ContentPage
     public DashboardPage()
     {
         InitializeComponent();
-
+        _journalService = new JournalService();
         RecentEntriesCollectionView.ItemsSource = _recentEntries;
     }
 
@@ -35,7 +36,9 @@ public partial class DashboardPage : ContentPage
     {
         base.OnAppearing();
 
-        var entries = await _journalService.GetEntriesAsync();
+        try
+        {
+            var entries = await _journalService.GetEntriesAsync();
         var ordered = entries.OrderByDescending(e => e.EntryDate.Date).ToList();
 
         // Recent entries
@@ -156,6 +159,12 @@ public partial class DashboardPage : ContentPage
         NegativePercentLabel.Text = $"{negativePercent:F0}%";
         NegativeCountLabel.Text = $"({negative})";
         NegativeProgressBar.Progress = negativePercent / 100.0;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error loading dashboard: {ex}");
+            await DisplayAlert("Error", $"Failed to load dashboard: {ex.Message}", "OK");
+        }
     }
 
     public static int CountWords(string? text)

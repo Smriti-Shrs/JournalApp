@@ -2,36 +2,41 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JournalApp.SettingsPage"
-             Title="Settings">
+             Title="Settings"
+             BackgroundColor="#f8fafc">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="12">
-            <Label Text="Settings" Style="{StaticResource TitleLabelStyle}" />
-
+        <VerticalStackLayout Padding="20" Spacing="16">
             <!-- Theme toggle -->
-            <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
-                   CornerRadius="10"
-                   Padding="10">
-                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                    <Label Text="Dark Theme" VerticalOptions="Center" />
+            <Frame BackgroundColor="White"
+                   CornerRadius="12"
+                   Padding="16"
+                   HasShadow="True">
+                <HorizontalStackLayout Spacing="12" VerticalOptions="Center">
+                    <Label Text="🌙 Dark Theme" VerticalOptions="Center" FontSize="14" TextColor="#0f172a" />
                     <Switch x:Name="DarkThemeSwitch"
-                            Toggled="OnDarkThemeToggled" />
+                            Toggled="OnDarkThemeToggled" HorizontalOptions="EndAndExpand" />
                 </HorizontalStackLayout>
             </Frame>
 
             <!-- Export journals as PDF -->
-            <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
-                   CornerRadius="10"
-                   Padding="10">
-                <VerticalStackLayout Spacing="8">
-                    <Label Text="Export Journals as PDF" FontAttributes="Bold" />
-                    <Grid ColumnDefinitions="Auto,*,Auto,*" ColumnSpacing="6">
-                        <Label Text="From:" VerticalOptions="Center" />
-                        <DatePicker x:Name="ExportFromDatePicker" Grid.Column="1" />
-                        <Label Text="To:" Grid.Column="2" VerticalOptions="Center" Margin="10,0,0,0" />
-                        <DatePicker x:Name="ExportToDatePicker" Grid.Column="3" />
-                    </Grid>
-                    <Button Text="Export PDF" Clicked="OnExportPdfClicked" />
+            <Frame BackgroundColor="White"
+                   CornerRadius="12"
+                   Padding="16"
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="📄 Export Journals as PDF" FontAttributes="Bold" FontSize="14" TextColor="#0f172a" />
+                    <VerticalStackLayout Spacing="8">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="From:" FontSize="12" TextColor="#475569" />
+                            <DatePicker x:Name="ExportFromDatePicker" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="To:" FontSize="12" TextColor="#475569" />
+                            <DatePicker x:Name="ExportToDatePicker" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                    <Button Text="Export PDF" Clicked="OnExportPdfClicked" BackgroundColor="#6366f1" TextColor="White" />
                 </VerticalStackLayout>
             </Frame>
         </VerticalStackLayout>
