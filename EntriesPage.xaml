@@ -8,19 +8,40 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="16">
             <!-- Search & filter -->
-            <Frame Padding="12" CornerRadius="10" HasShadow="True" BackgroundColor="White">
+            <Frame Padding="16" CornerRadius="10" HasShadow="True" BackgroundColor="White" BorderColor="#e2e8f0">
                 <VerticalStackLayout Spacing="12">
-                    <Entry x:Name="SearchEntry" Placeholder="Search by title or content" />
-                    <Picker x:Name="MoodFilterPicker" Title="Filter by mood (optional)" />
+                    <Label Text="🔍 Search and Filter" FontAttributes="Bold" TextColor="#0f172a" FontSize="14" />
+                    <Entry x:Name="SearchEntry" 
+                           Placeholder="Search by title or content" 
+                           PlaceholderColor="#cbd5e1"
+                           TextColor="#0f172a" />
+                    <Border Stroke="#e2e8f0" StrokeThickness="1" BackgroundColor="White" Padding="8,4">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="6"/>
+                        </Border.StrokeShape>
+                        <Picker x:Name="MoodFilterPicker" 
+                                Title="Filter by mood (optional)" 
+                                TextColor="#6366f1"
+                                BackgroundColor="Transparent" />
+                    </Border>
                 </VerticalStackLayout>
             </Frame>
+
+            <!-- Empty state message -->
+            <Label x:Name="EmptyLabel" 
+                   Text="No entries yet. Click 'New Entry' to create your first journal entry!" 
+                   TextColor="#6b7280" 
+                   FontSize="14"
+                   HorizontalOptions="Center"
+                   Margin="20"
+                   IsVisible="True" />
 
             <CollectionView x:Name="EntriesCollectionView"
                             SelectionMode="Single"
                             HeightRequest="400">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Margin="0,4" Padding="12" CornerRadius="10" HasShadow="True" BackgroundColor="White">
+                        <Frame Margin="0,4" Padding="12" CornerRadius="10" HasShadow="True" BackgroundColor="White" BorderColor="#e2e8f0">
                             <VerticalStackLayout Spacing="6">
                                 <Label Text="{Binding EntryDate, StringFormat='{}{0:MMM dd, yyyy}'}"
                                        FontAttributes="Bold" TextColor="#6366f1" FontSize="14" />

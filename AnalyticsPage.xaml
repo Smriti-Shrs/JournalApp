@@ -11,11 +11,11 @@
             <Frame Padding="12" CornerRadius="10" HasShadow="True" BackgroundColor="White">
                 <VerticalStackLayout Spacing="12">
                     <Label Text="Filter by Date Range" FontAttributes="Bold" TextColor="#0f172a" />
-                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8" RowSpacing="8">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8" RowSpacing="8" RowDefinitions="Auto,Auto">
                         <Label Text="From:" VerticalOptions="Center" TextColor="#475569" />
                         <DatePicker x:Name="FromDatePicker" Grid.Column="1" />
-                        <Label Text="To:" TextColor="#475569" />
-                        <DatePicker x:Name="ToDatePicker" Grid.Column="1" />
+                        <Label Grid.Row="1" Text="To:" VerticalOptions="Center" TextColor="#475569" />
+                        <DatePicker x:Name="ToDatePicker" Grid.Row="1" Grid.Column="1" />
                     </Grid>
                     <Button Text="Update" Clicked="OnUpdateAnalyticsClicked" BackgroundColor="#6366f1" TextColor="White" />
                 </VerticalStackLayout>
