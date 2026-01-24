@@ -176,4 +176,13 @@ public partial class DashboardPage : ContentPage
             .Split(' ', StringSplitOptions.RemoveEmptyEntries)
             .Length;
     }
+
+    private async void OnEntrySelected(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.CurrentSelection.FirstOrDefault() is JournalEntry entry)
+        {
+            ((CollectionView)sender).SelectedItem = null;
+            await Navigation.PushAsync(new EntryDetailPage(entry));
+        }
+    }
 }

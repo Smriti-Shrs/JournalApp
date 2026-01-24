@@ -10,6 +10,7 @@ public class CalendarDayViewModel
     public int DayNumber => Date.Day;
     public string MoodEmoji { get; set; } = string.Empty;
     public Color BackgroundColor { get; set; } = Colors.Transparent;
+    public bool HasEntry { get; set; }
 }
 
 public partial class CalendarPage : ContentPage
@@ -67,6 +68,7 @@ public partial class CalendarPage : ContentPage
 
             if (byDate.TryGetValue(date.Date, out var entry))
             {
+                dayVm.HasEntry = true;
                 // Color based on mood category
                 var mood = (entry.PrimaryMood ?? string.Empty).Trim();
                 if (DashboardPage.PositiveMoods.Contains(mood, StringComparer.OrdinalIgnoreCase))
@@ -94,8 +96,6 @@ public partial class CalendarPage : ContentPage
 
             _days.Add(dayVm);
         }
-
-        SelectedDateLabel.Text = "Select a date to see entry info.";
     }
 
     private async void OnDaySelected(object sender, SelectionChangedEventArgs e)
@@ -103,14 +103,29 @@ public partial class CalendarPage : ContentPage
         if (e.CurrentSelection.FirstOrDefault() is not CalendarDayViewModel day)
             return;
 
+        ((CollectionView)sender).SelectedItem = null;
+
         var entry = await _journalService.GetEntryByDateAsync(day.Date);
-        if (entry == null)
+        
+        if (entry != null)
         {
-            SelectedDateLabel.Text = $"No entry for {day.Date:yyyy-MM-dd}";
+            // Entry exists - open detail page to view/edit
+            await Navigation.PushAsync(new EntryDetailPage(entry));
         }
         else
         {
-            SelectedDateLabel.Text = $"{day.Date:yyyy-MM-dd}: {entry.Title} ({entry.PrimaryMood})";
+            // No entry - ask if they want to create one
+            bool create = await DisplayAlert(
+                $"No Entry for {day.Date:MMM dd, yyyy}",
+                "Would you like to create an entry for this date?",
+                "Create",
+                "Cancel");
+
+            if (create)
+            {
+                // Navigate to New Entry page (MainPage)
+                await Shell.Current.GoToAsync("//New Entry");
+            }
         }
     }
 }

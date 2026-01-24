@@ -74,4 +74,13 @@ public partial class EntriesPage : ContentPage
         foreach (var entry in filtered)
             _entries.Add(entry);
     }
+
+    private async void OnEntrySelected(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.CurrentSelection.FirstOrDefault() is JournalEntry entry)
+        {
+            ((CollectionView)sender).SelectedItem = null;
+            await Navigation.PushAsync(new EntryDetailPage(entry));
+        }
+    }
 }

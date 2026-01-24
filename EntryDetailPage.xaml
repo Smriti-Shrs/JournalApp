@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JournalApp.EntryDetailPage"
+             Title="Entry Details"
+             BackgroundColor="#f8fafc">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+            
+            <!-- Title -->
+            <Label Text="Title" FontSize="12" TextColor="#6b7280" />
+            <Border BackgroundColor="White" Stroke="#e2e8f0" StrokeThickness="1" Padding="12" StrokeShape="RoundRectangle 8">
+                <Entry x:Name="TitleEntry" FontSize="16" TextColor="#0f172a" Placeholder="Entry title" />
+            </Border>
+
+            <!-- Date -->
+            <Label Text="Date" FontSize="12" TextColor="#6b7280" />
+            <Border BackgroundColor="White" Stroke="#e2e8f0" StrokeThickness="1" Padding="12" StrokeShape="RoundRectangle 8">
+                <DatePicker x:Name="EntryDatePicker" TextColor="#0f172a" />
+            </Border>
+
+            <!-- Mood -->
+            <Label Text="Primary Mood" FontSize="12" TextColor="#6b7280" />
+            <Border BackgroundColor="White" Stroke="#e2e8f0" StrokeThickness="1" Padding="12" StrokeShape="RoundRectangle 8">
+                <Picker x:Name="MoodPicker" TextColor="#0f172a" />
+            </Border>
+
+            <!-- Tags -->
+            <Label Text="Tags (comma-separated)" FontSize="12" TextColor="#6b7280" />
+            <Border BackgroundColor="White" Stroke="#e2e8f0" StrokeThickness="1" Padding="12" StrokeShape="RoundRectangle 8">
+                <Entry x:Name="TagsEntry" FontSize="14" TextColor="#0f172a" Placeholder="work, personal, goals" />
+            </Border>
+
+            <!-- Content -->
+            <Label Text="Content" FontSize="12" TextColor="#6b7280" />
+            <Border BackgroundColor="White" Stroke="#e2e8f0" StrokeThickness="1" Padding="12" StrokeShape="RoundRectangle 8">
+                <Editor x:Name="ContentEditor" 
+                        HeightRequest="300" 
+                        FontSize="14" 
+                        TextColor="#0f172a"
+                        Placeholder="Write your thoughts here..."
+                        AutoSize="TextChanges" />
+            </Border>
+
+            <!-- Action Buttons -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12" Margin="0,20,0,0">
+                <Button Text="Save Changes" 
+                        Clicked="OnSaveClicked"
+                        BackgroundColor="#6366f1" 
+                        TextColor="White"
+                        CornerRadius="8"
+                        Grid.Column="0" />
+                
+                <Button Text="Delete Entry" 
+                        Clicked="OnDeleteClicked"
+                        BackgroundColor="#ef4444" 
+                        TextColor="White"
+                        CornerRadius="8"
+                        Grid.Column="1" />
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

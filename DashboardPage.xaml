@@ -76,7 +76,10 @@
 
             <!-- Recent Entries -->
             <Label Text="Recent Entries" FontSize="16" FontAttributes="Bold" Margin="0,10,0,0" TextColor="#0f172a" />
-            <CollectionView x:Name="RecentEntriesCollectionView" HeightRequest="150">
+            <CollectionView x:Name="RecentEntriesCollectionView" 
+                            HeightRequest="150"
+                            SelectionMode="Single"
+                            SelectionChanged="OnEntrySelected">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Padding="8" Margin="0,4" CornerRadius="8" HasShadow="True" BackgroundColor="White">

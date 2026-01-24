@@ -38,6 +38,7 @@
 
             <CollectionView x:Name="EntriesCollectionView"
                             SelectionMode="Single"
+                            SelectionChanged="OnEntrySelected"
                             HeightRequest="400">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
