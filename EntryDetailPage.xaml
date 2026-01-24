@@ -8,6 +8,14 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="16">
             
+            <!-- Back Button -->
+            <Button Text="← Back" 
+                    Clicked="OnBackClicked"
+                    BackgroundColor="Transparent" 
+                    TextColor="#6366f1"
+                    HorizontalOptions="Start"
+                    Margin="0,0,0,10" />
+            
             <!-- Title -->
             <Label Text="Title" FontSize="12" TextColor="#6b7280" />
             <Border BackgroundColor="White" Stroke="#e2e8f0" StrokeThickness="1" Padding="12" StrokeShape="RoundRectangle 8">

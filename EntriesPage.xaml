@@ -12,7 +12,7 @@
                 <VerticalStackLayout Spacing="12">
                     <Label Text="🔍 Search and Filter" FontAttributes="Bold" TextColor="#0f172a" FontSize="14" />
                     <Entry x:Name="SearchEntry" 
-                           Placeholder="Search by title or content" 
+                           Placeholder="Search by title, content, or tags" 
                            PlaceholderColor="#cbd5e1"
                            TextColor="#0f172a" />
                     <Border Stroke="#e2e8f0" StrokeThickness="1" BackgroundColor="White" Padding="8,4">
@@ -24,6 +24,12 @@
                                 TextColor="#6366f1"
                                 BackgroundColor="Transparent" />
                     </Border>
+                    <Button Text="Clear Filters" 
+                            Clicked="OnClearFiltersClicked"
+                            BackgroundColor="#e2e8f0" 
+                            TextColor="#0f172a"
+                            CornerRadius="6"
+                            HeightRequest="35" />
                 </VerticalStackLayout>
             </Frame>
 

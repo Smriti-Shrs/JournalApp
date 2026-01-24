@@ -25,6 +25,11 @@ public partial class CalendarPage : ContentPage
         InitializeComponent();
 
         CalendarCollectionView.ItemsSource = _days;
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
         BuildCalendar();
     }
 

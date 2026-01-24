@@ -61,7 +61,7 @@ public partial class EntryDetailPage : ContentPage
             await _journalService.UpdateEntryAsync(_entry);
             
             await DisplayAlert("Success", "Entry updated successfully!", "OK");
-            await Shell.Current.GoToAsync("..");
+            await Navigation.PopAsync();
         }
         catch (Exception ex)
         {
@@ -86,12 +86,17 @@ public partial class EntryDetailPage : ContentPage
             await _journalService.DeleteEntryAsync(_entry.Id);
             
             await DisplayAlert("Success", "Entry deleted successfully!", "OK");
-            await Shell.Current.GoToAsync("../..");
+            await Navigation.PopAsync();
         }
         catch (Exception ex)
         {
             Debug.WriteLine($"Error deleting entry: {ex.Message}");
             await DisplayAlert("Error", $"Failed to delete entry: {ex.Message}", "OK");
         }
+    }
+
+    private async void OnBackClicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
     }
 }

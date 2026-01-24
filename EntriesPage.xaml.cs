@@ -31,7 +31,11 @@ public partial class EntriesPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+        await LoadEntriesAsync();
+    }
 
+    private async Task LoadEntriesAsync()
+    {
         _entries.Clear();
         _allEntries.Clear();
 
@@ -49,7 +53,11 @@ public partial class EntriesPage : ContentPage
     private void ApplyFilter()
     {
         if (_allEntries.Count == 0)
+        {
+            EmptyLabel.IsVisible = true;
+            EmptyLabel.Text = "No entries yet. Click 'New Entry' to create your first journal entry!";
             return;
+        }
 
         var search = (SearchEntry.Text ?? string.Empty).Trim().ToLowerInvariant();
         var mood = MoodFilterPicker.SelectedItem as string;
@@ -60,7 +68,8 @@ public partial class EntriesPage : ContentPage
         {
             filtered = filtered.Where(e =>
                 (e.Title ?? string.Empty).ToLowerInvariant().Contains(search) ||
-                (e.Content ?? string.Empty).ToLowerInvariant().Contains(search));
+                (e.Content ?? string.Empty).ToLowerInvariant().Contains(search) ||
+                (e.Tags ?? string.Empty).ToLowerInvariant().Contains(search));
         }
 
         if (!string.IsNullOrWhiteSpace(mood))
@@ -70,9 +79,22 @@ public partial class EntriesPage : ContentPage
                 (e.SecondaryMoods ?? string.Empty).Contains(mood, StringComparison.OrdinalIgnoreCase));
         }
 
+        var filteredList = filtered.ToList();
+        
         _entries.Clear();
-        foreach (var entry in filtered)
+        foreach (var entry in filteredList)
             _entries.Add(entry);
+
+        // Update empty state
+        if (filteredList.Count == 0)
+        {
+            EmptyLabel.IsVisible = true;
+            EmptyLabel.Text = "No entries match your search or filter criteria.";
+        }
+        else
+        {
+            EmptyLabel.IsVisible = false;
+        }
     }
 
     private async void OnEntrySelected(object sender, SelectionChangedEventArgs e)
@@ -82,5 +104,12 @@ public partial class EntriesPage : ContentPage
             ((CollectionView)sender).SelectedItem = null;
             await Navigation.PushAsync(new EntryDetailPage(entry));
         }
+    }
+
+    private void OnClearFiltersClicked(object sender, EventArgs e)
+    {
+        SearchEntry.Text = string.Empty;
+        MoodFilterPicker.SelectedIndex = -1;
+        ApplyFilter();
     }
 }
